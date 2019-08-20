@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ListNeighbourActivity extends AppCompatActivity implements MyNeighbourRecyclerViewAdapter.OnNeighbourClickListener {
+
+    public static final String KEY_FOR_NEIGHBOUR_INTENT_EXTRA = "KEY_FOR_NEIGHBOUR_INTENT_EXTRA";
 
     // UI Components
     @BindView(R.id.tabs)
@@ -40,6 +43,8 @@ public class ListNeighbourActivity extends AppCompatActivity implements MyNeighb
 
     @Override
     public void onNeighbourClick(Neighbour neighbour) {
-        Toast.makeText(this, "yeah "+ neighbour.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,AboutNeighbourActivity.class);
+        intent.putExtra(KEY_FOR_NEIGHBOUR_INTENT_EXTRA,neighbour);
+        startActivity(intent);
     }
 }
