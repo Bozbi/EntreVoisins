@@ -24,16 +24,18 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
+    private OnNeighbourClickListener mOnNeighbourClickListener;
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items,OnNeighbourClickListener onNeighbourClickListener) {
         mNeighbours = items;
+        mOnNeighbourClickListener = onNeighbourClickListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_neighbour, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,mOnNeighbourClickListener);
     }
 
     @Override
@@ -58,7 +60,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         return mNeighbours.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
         @BindView(R.id.item_list_name)
@@ -66,9 +68,25 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
 
-        public ViewHolder(View view) {
+        private OnNeighbourClickListener mOnNeighbourClickListener;
+
+        public ViewHolder(View view, OnNeighbourClickListener onNeighbourClickListener) {
             super(view);
             ButterKnife.bind(this, view);
+            mOnNeighbourClickListener = onNeighbourClickListener;
+
+            view.setOnClickListener(this);
         }
+
+
+        @Override
+        public void onClick(View v) {
+            mOnNeighbourClickListener.onNeighbourClick(mNeighbours.get(getAdapterPosition()));
+
+        }
+    }
+
+    public interface OnNeighbourClickListener{
+        void onNeighbourClick(Neighbour neighbour);
     }
 }
