@@ -38,7 +38,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
                 iNeighbour.setFavorite(false);
             }
         }
-
     }
 
     @Override

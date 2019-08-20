@@ -78,14 +78,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             view.setOnClickListener(this);
         }
 
-
         @Override
         public void onClick(View v) {
             mOnNeighbourClickListener.onNeighbourClick(mNeighbours.get(getAdapterPosition()));
 
         }
     }
-
     public interface OnNeighbourClickListener{
         void onNeighbourClick(Neighbour neighbour);
     }
