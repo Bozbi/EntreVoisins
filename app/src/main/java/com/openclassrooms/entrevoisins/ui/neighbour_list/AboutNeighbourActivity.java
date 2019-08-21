@@ -13,8 +13,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
+import com.openclassrooms.entrevoisins.events.NeighbourOnFavoriteChange;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,8 +66,7 @@ public class AboutNeighbourActivity extends AppCompatActivity {
         mBackArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ListNeighbourActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -85,15 +88,12 @@ public class AboutNeighbourActivity extends AppCompatActivity {
                     mApiService.addToFavorite(neighbour);
                     neighbour.setFavorite(true);
                 }
+
+                EventBus.getDefault().post(new NeighbourOnFavoriteChange());
             }
         });
 
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, ListNeighbourActivity.class);
-        startActivity(intent);
-        super.onBackPressed();
-    }
+
 }

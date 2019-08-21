@@ -3,6 +3,8 @@ package com.openclassrooms.entrevoisins.neighbour_list;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
@@ -22,6 +24,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -88,10 +91,15 @@ public class NeighboursListTest {
      * When Click On neighbour, name text view is displayed
      */
     @Test
-    public void aboutActivity_nameTextViewIsDisplayed() {
+    public void aboutActivity_sameNameIsDisplayedInTextView() {
+        RecyclerView recyclerView = mActivity.findViewById(R.id.list_neighbours);
+        TextView textView = recyclerView.getChildAt(0).findViewById(R.id.item_list_name);
+        String name = textView.getText().toString();
         onView(withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(0, click()));
         onView(withId(R.id.neighbour_name_txt_view)).check(matches(isDisplayed()));
         onView(withId(R.id.name_in_card_text_view)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.neighbour_name_txt_view)).check(matches(withText(name)));
     }
 
     /**
@@ -104,7 +112,6 @@ public class NeighboursListTest {
         onView(withId(R.id.list_favorite_neighbours)).perform(actionOnItemAtPosition(0, click()));
         onView(withId(R.id.favorite_button)).perform(click());
         onView(withId(R.id.back_arrow)).perform(click());
-        onView(withId(R.id.list_neighbours)).perform(swipeLeft());
         onView(withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVORITE_ITEMS_COUNT - 1));
     }
 }

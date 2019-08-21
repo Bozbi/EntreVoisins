@@ -11,6 +11,7 @@ import org.junit.runners.JUnit4;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -47,6 +48,7 @@ public class NeighbourServiceTest {
         Neighbour neighbourToAdd = service.getNeighbours().get(0);
         service.addToFavorite(neighbourToAdd);
         assertTrue(service.getNeighbours().get(0).isFavorite());
+        assertEquals(neighbourToAdd.getId(),service.getNeighbours().get(0).getId());
     }
 
     @Test
@@ -54,5 +56,6 @@ public class NeighbourServiceTest {
         Neighbour neighbourToRemove = service.getNeighbours().get(8);
         service.removeFromFavorite(neighbourToRemove);
         assertFalse(service.getNeighbours().get(8).isFavorite());
+        assertEquals(neighbourToRemove.getId(),service.getNeighbours().get(8).getId());
     }
 }

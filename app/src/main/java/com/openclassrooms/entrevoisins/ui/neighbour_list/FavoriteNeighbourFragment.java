@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
+import com.openclassrooms.entrevoisins.events.NeighbourOnFavoriteChange;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -52,6 +54,7 @@ public class FavoriteNeighbourFragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         mApiService = DI.getNeighbourApiService();
     }
 
@@ -82,15 +85,10 @@ public class FavoriteNeighbourFragment extends Fragment  {
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(favoriteNeighbours,mOnNeighbourClickListener));
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
 
@@ -101,6 +99,11 @@ public class FavoriteNeighbourFragment extends Fragment  {
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
+        initList();
+    }
+
+    @Subscribe
+    public void onNeighbourFavoriteChange(NeighbourOnFavoriteChange neighbourOnFavoriteChange){
         initList();
     }
 
