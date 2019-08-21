@@ -28,9 +28,17 @@ particuliers, de nombreuses options s’offrent aux utilisateurs !
 
 ## Test 
 
-Les test unitaires et instrumentalisés des fonctionnalités d'**Entrevoisins** ont étés implementés.
-Les resultats des test ont étés exportés au format html à la racine du dossier du code source
-[Here](\TestResults_NeighbourServiceTest.html)
+Les test unitaires et instrumentalisés des fonctionnalités d'**Entrevoisins** ont étés créés.
+
+Les resultats des test ont étés exportés au format html à la racine du dossier du code source:
+
+1) Test Unitaire : TestResults_NeighbourServiceTest.html
+2) Tests Instrumentalisés : TestResults_NeighboursListTest.html
+
+## Installation 
+
+L'application n'étant pas encore en production, l'APK doit être lancée depuis Android Studio sur un Emulateur ou un Mobile en mode developpeur.
+
 
 
 
