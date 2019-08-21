@@ -14,7 +14,7 @@ particuliers, de nombreuses options s’offrent aux utilisateurs !
 
 ## Fonctionalités
 
-**Entrevoisins** possède les fonctionnalités suivantes
+**Entrevoisins** possède les fonctionnalités suivantes:
 1) Lister ses voisins
 2) Lister ses voisins favoris
 3) Supprimer un voisin de la liste
@@ -23,8 +23,14 @@ particuliers, de nombreuses options s’offrent aux utilisateurs !
 6) Supprimer un voisin des favoris
 
 <p align="center">
-<img  height = " 200" src="https://user-images.githubusercontent.com/17552720/63435172-bd957200-c426-11e9-9ea8-36222981b54e.png">
+<img  height = " 400" src="https://user-images.githubusercontent.com/17552720/63435172-bd957200-c426-11e9-9ea8-36222981b54e.png">
 </p>
+
+## Test 
+
+Les test unitaires et instrumentalisés des fonctionnalités d'**Entrevoisins** ont étés implementés.
+Les resultats des test ont étés exportés au format html à la racine du dossier du code source
+[Here](\TestResults_NeighbourServiceTest.html)
 
 
 
