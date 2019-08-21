@@ -12,8 +12,18 @@
 se rendre des petits services : garde d’animaux, petit bricolage, troc d’objets, cours 
 particuliers, de nombreuses options s’offrent aux utilisateurs !
 
+## Fonctionalités
+
+**Entrevoisins** possède les fonctionnalités suivantes
+1) Lister ses voisins
+2) Lister ses voisins favoris
+3) Supprimer un voisin de la liste
+4) Accéder aux informations personnelles d'un voisin
+5) Ajouter un voisin aux favoris
+6) Supprimer un voisin des favoris
+
 <p align="center">
-<img  src="https://user-images.githubusercontent.com/17552720/63433338-47434080-c423-11e9-82ea-aa6894f5d466.png">
+<img  height = " 200" src="https://user-images.githubusercontent.com/17552720/63435172-bd957200-c426-11e9-9ea8-36222981b54e.png">
 </p>
 
 
