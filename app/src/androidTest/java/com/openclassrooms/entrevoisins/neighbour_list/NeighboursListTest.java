@@ -1,23 +1,13 @@
 
 package com.openclassrooms.entrevoisins.neighbour_list;
 
-import android.support.test.espresso.ViewAssertion;
-import android.support.test.espresso.assertion.ViewAssertions;
-import android.support.test.espresso.intent.Intents;
-import android.support.test.espresso.intent.matcher.IntentMatchers;
-import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
-import com.openclassrooms.entrevoisins.ui.neighbour_list.AboutNeighbourActivity;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,15 +15,12 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
-import static android.support.test.espresso.contrib.RecyclerViewActions.scrollTo;
-import static android.support.test.espresso.intent.Intents.*;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
-import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static android.support.test.espresso.matcher.ViewMatchers.withChild;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -93,7 +80,8 @@ public class NeighboursListTest {
      */
     @Test
     public void myNeighbourList_clickOnNeighbour_shouldLaunchAboutActivity() {
-
+        onView(withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.about_neihgbour_acvtivity_scroll_view)).check(matches(isDisplayed()));
     }
 
     /**
@@ -101,7 +89,9 @@ public class NeighboursListTest {
      */
     @Test
     public void aboutActivity_nameTextViewIsDisplayed() {
-
+        onView(withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.neighbour_name_txt_view)).check(matches(isDisplayed()));
+        onView(withId(R.id.name_in_card_text_view)).check(matches(isDisplayed()));
     }
 
     /**
@@ -109,6 +99,12 @@ public class NeighboursListTest {
      */
     @Test
     public void myFavoriteNeighbourList_viewPagerOnFavorites_FavoritesOnlyAreDisplayed() {
-        
+        onView(withId(R.id.list_neighbours)).perform(swipeLeft());
+        onView(withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVORITE_ITEMS_COUNT));
+        onView(withId(R.id.list_favorite_neighbours)).perform(actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.favorite_button)).perform(click());
+        onView(withId(R.id.back_arrow)).perform(click());
+        onView(withId(R.id.list_neighbours)).perform(swipeLeft());
+        onView(withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVORITE_ITEMS_COUNT - 1));
     }
 }
