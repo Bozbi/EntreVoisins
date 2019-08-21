@@ -1,5 +1,4 @@
 # EntreVoisins
+*Ce dépôt contient une mini-application pour le P3 du parcours **Grande École du Numérique**.*
 
-Ce dépôt contient une mini-application pour le P3 du parcours **Grande École du Numérique**.
-
-il ne me reste plus qu'à écrire le ***README.md***
+**Entrevoisins** est une application qui permet à des personnes d’un même quartier de se rendre des petits services : garde d’animaux, petit bricolage, troc d’objets, cours particuliers, de nombreuses options s’offrent aux utilisateurs !
